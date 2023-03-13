@@ -1,19 +1,27 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import css from '../Searchbar/Searchbar.module.css';
 
 export class Searchbar extends React.Component {
+  handleSubmit = evt => {
+    evt.preventDefault();
+    const form = evt.currentTarget;
+    const searchQuery = form.elements.searchQuery.value;
+    console.log(searchQuery);
+    this.props.handleSubmit(searchQuery);
+  };
   render() {
-    const { onSubmit } = this.props;
     return (
-      <header className="searchbar">
-        <form className="form">
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
+      <header className={css.Searchbar}>
+        <form className={css.SearchForm} onSubmit={this.handleSubmit}>
+          <button type="submit" className={css.SearchForm__button}>
+            <span className={css.SearchForm__button__label}>Search</span>
           </button>
 
           <input
-            className="input"
+            className={css.SearchForm__input}
             type="text"
+            name="searchQuery"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
@@ -23,34 +31,6 @@ export class Searchbar extends React.Component {
     );
   }
 }
-Searchbar.propTypes = {};
-
-// niżej działający komponent funkcyjny
-
-// import React from 'react';
-// export const ContactList = ({ contacts, onRemoveContact }) => {
-//   return (
-//     <>
-//       <ul>
-//         {contacts.map(elem => (
-//           <li className={css.list__elem} key={elem.id}>
-//             <span className={css.name}>{elem.name}</span>
-//             <span className={css.number}>{elem.number}</span>
-//             <button
-//               className={css.button}
-//               type="Button"
-//               onClick={() => onRemoveContact(elem.id)}
-//             >
-//               Delete
-//             </button>
-//           </li>
-//         ))}
-//       </ul>
-//     </>
-//   );
-// };
-
-// ContactList.propTypes = {
-//   contacts: PropTypes.array,
-//   removeContact: PropTypes.func,
-// };
+Searchbar.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
