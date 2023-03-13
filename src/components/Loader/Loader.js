@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import css from '../Loader/Loader.module.css';
 
@@ -12,4 +11,3 @@ export class Loader extends React.Component {
     );
   }
 }
-Loader.propTypes = {};
